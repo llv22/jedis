@@ -155,7 +155,8 @@ public class ShardedJedisTest extends Assert {
 
         assertNotSame(jedis.getShard(keys.get(0)), jedis.getShard(keys.get(1)));
 
-        List<Object> results = jedis.pipelined(new ShardedJedisPipeline() {
+        @SuppressWarnings("deprecation")
+		List<Object> results = jedis.pipelined(new ShardedJedisPipeline() {
             public void execute() {
                 get(keys.get(0));
                 get(keys.get(1));
