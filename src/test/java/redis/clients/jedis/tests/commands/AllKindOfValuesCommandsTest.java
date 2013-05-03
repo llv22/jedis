@@ -304,12 +304,12 @@ public class AllKindOfValuesCommandsTest extends JedisCommandTestBase {
 	}
 
 	/**
-	 * in redis 2.6.13, ttl client is still -1, if key doesn't exists
-	 * TAKE CARE! change line 312 for testing of ttl non-existing key "foo" and bfoo
+	 * in redis 2.6.13, ttl client is still -1, if key doesn't exists TAKE CARE!
+	 * change line 312 for testing of ttl non-existing key "foo" and bfoo
 	 */
 	@Test
 	public void ttl() {
-		//TODO : non-existing key for "foo" -> changed to -1
+		// TODO : non-existing key for "foo" -> changed to -1
 		long ttl = jedis.ttl("foo");
 		assertEquals(-1, ttl);
 
@@ -322,7 +322,7 @@ public class AllKindOfValuesCommandsTest extends JedisCommandTestBase {
 		assertTrue(ttl >= 0 && ttl <= 20);
 
 		// Binary
-		//TODO : non-existing key for bfoo -> changed to -1
+		// TODO : non-existing key for bfoo -> changed to -1
 		long bttl = jedis.ttl(bfoo);
 		assertEquals(-1, bttl);
 
