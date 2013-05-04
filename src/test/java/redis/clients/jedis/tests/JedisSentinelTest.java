@@ -24,6 +24,15 @@ public class JedisSentinelTest {
 
 	@Before
 	public void setup() throws InterruptedException {
+		 preSetup();
+	}
+
+	/**
+	 * setup for new client
+	 * 
+	 * @throws InterruptedException
+	 */
+	private void preSetup() throws InterruptedException {
 		Jedis j = new Jedis("localhost", 6380);
 		j.auth("foobared");
 		j.configSet("masterauth", "foobared");
@@ -36,6 +45,13 @@ public class JedisSentinelTest {
 
 	@After
 	public void clear() {
+		 postClear();
+	}
+
+	/**
+	 * clear-up for client
+	 */
+	private void postClear() {
 		Jedis j = new Jedis("localhost", 6380);
 		j.auth("foobared");
 		j.slaveofNoOne();
@@ -43,18 +59,20 @@ public class JedisSentinelTest {
 
 	@Test
 	public void sentinel() {
-		// TODO : here port is incorrect
-		Jedis j = new Jedis("localhost", 6379);
+		//TODO : sentinel-instance
+		Jedis j = new Jedis("localhost", 26379);
 		List<Map<String, String>> masters = j.sentinelMasters();
 		final String masterName = masters.get(0).get("name");
 
 		assertEquals(MASTER_NAME, masterName);
 
+		//TODO : query sentinel-master
 		List<String> masterHostAndPort = j
 				.sentinelGetMasterAddrByName(masterName);
 		assertEquals("127.0.0.1", masterHostAndPort.get(0));
 		assertEquals("6379", masterHostAndPort.get(1));
 
+		//TODO : query sentinel-slave
 		List<Map<String, String>> slaves = j.sentinelSlaves(masterName);
 		assertEquals("6379", slaves.get(0).get("master-port"));
 
