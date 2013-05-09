@@ -42,8 +42,7 @@ public class RedisSocketClient {
 		jedis.connect();
 		jedis.auth("foobared");
 		jedis.configSet("timeout", "300");
-		// TODO : must be some bugs here - flush all is used to clear-up all
-		// commands
+		// TODO : flush all is used to clear-up all keys
 		// jedis.flushAll();
 		Boolean exists = jedis.scriptExists(scriptKey);
 		if (exists) {
@@ -63,8 +62,7 @@ public class RedisSocketClient {
 			for (String resItem : response) {
 				if ((i & 01) == 0) {
 					System.out.printf("%s", resItem);
-				}
-				else{
+				} else {
 					System.out.printf("-%s\n", resItem);
 				}
 				i++;
