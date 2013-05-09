@@ -18,6 +18,7 @@ import redis.clients.jedis.Jedis;
  * @since 2013-05-02
  * @see not passed-test case for 2.2.0-SNAPSHOT
  * @see should be fixed in 2.2.0-dev
+ * @see avoid additional setup for cluster, as we setup sentinel via cluster
  */
 public class JedisSentinelTest {
 	private static final String MASTER_NAME = "mymaster";
